@@ -3,8 +3,7 @@ package com.zalo.kromanime.data.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.zalo.kromanime.data.api.models.ImagesUrls
-import com.zalo.kromanime.data.api.models.Trailer
+import com.zalo.kromanime.data.api.models.animes.Images
 
 
 /**
@@ -15,8 +14,8 @@ data class AnimeEntity(
     @PrimaryKey
     val mal_id: Int?,
     val url: String?,
-    @TypeConverters(TrailerTypeConverter::class)
-    val trailer: Trailer?,
+    @TypeConverters(ImagesTypeConverter::class)
+    val images: Images?,
     val approved: Boolean?,
     val title: String?,
     val titleEnglish: String?,

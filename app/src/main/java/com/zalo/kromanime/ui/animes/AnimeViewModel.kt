@@ -35,7 +35,8 @@ class AnimeViewModel @Inject constructor(
                 val errorMessage = "An error occurred: ${exception.localizedMessage}"
             }
         }
-
     }
+
+    fun getFilteredAnimeList(query: String) = animeRepository.getFilteredAnimeList(query).asLiveData()
 
 }

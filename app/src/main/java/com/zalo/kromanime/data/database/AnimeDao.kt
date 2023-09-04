@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-
+import androidx.room.Transaction
 
 /**
 Created by zaloaustine in 9/4/23.
@@ -20,4 +20,8 @@ interface AnimeDao {
 
     @Query("DELETE FROM anime_table")
     suspend fun clearAll()
+
+    @Transaction
+    @Query("SELECT * FROM anime_table WHERE title LIKE '%' || :query || '%' ORDER BY mal_id ASC")
+    fun getFilteredAnime(query: String): PagingSource<Int, AnimeEntity>
 }

@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 Created by zaloaustine in 9/4/23.
  */
 @Database(entities = [AnimeEntity::class], version = 2, exportSchema = false)
-@TypeConverters(TrailerTypeConverter::class,ImagesUrlsTypeConverter::class)
+@TypeConverters(ImagesTypeConverter::class)
 abstract class AnimeDatabase : RoomDatabase() {
     abstract fun animeDao(): AnimeDao
 }

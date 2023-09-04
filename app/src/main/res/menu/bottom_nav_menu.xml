@@ -8,6 +8,6 @@
 
     <item
         android:id="@+id/image_Upload_navigation"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/ic_baseline_cloud_upload_24"
+        android:title="Upload" />
 </menu>

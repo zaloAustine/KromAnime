@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@drawable/rounded_searchview</item>
+        <item name="fontFamily">@font/nunito_extralight</item>
+    </style>
+
+    <style name="LaunchTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize primary colors -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <item name="colorAccent">@color/purple_200</item>
+        <item name="android:progressBarStyle">@style/CustomProgressBar</item>
+        <item name="fontFamily">@font/nunito_extralight</item>
+    </style>
+
+    <style name="CustomProgressBar" parent="android:Widget.ProgressBar">
+        <item name="android:indeterminateTint">@color/progressBarColor</item>
+        <item name="fontFamily">@font/nunito_extralight</item><!-- Set the ProgressBar color -->
+    </style>
+</resources>

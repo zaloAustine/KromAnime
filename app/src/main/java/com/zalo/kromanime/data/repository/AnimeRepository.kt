@@ -34,8 +34,25 @@ class AnimeRepository @Inject constructor(
         ).flow
     }
 
+    @OptIn(ExperimentalPagingApi::class)
+    fun getFilteredAnimeList(query: String): Flow<PagingData<AnimeEntity>> {
+        val pagingConfig = PagingConfig(
+            pageSize = PAGE_SIZE,
+            enablePlaceholders = false,
+            prefetchDistance = PREFETCH_DISTANCE
+        )
+
+        val remoteMediator = AnimeRemoteMediator(apiService, animeDatabase)
+
+        return Pager(
+            config = pagingConfig,
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = { animeDatabase.animeDao().getFilteredAnime(query) }
+        ).flow
+    }
+
     companion object {
-        private const val PAGE_SIZE = 20
+        private const val PAGE_SIZE = 25
         private const val PREFETCH_DISTANCE = 3
     }
 }

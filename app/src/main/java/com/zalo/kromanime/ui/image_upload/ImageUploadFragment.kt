@@ -46,8 +46,13 @@ class ImageUploadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
+        activity?.title = "Image Upload"
         binding.buttonSelectImage.setOnClickListener {
             pickImage()
+        }
+
+        binding.buttonTakeImage.setOnClickListener {
+            takeImage()
         }
     }
 
@@ -56,6 +61,7 @@ class ImageUploadFragment : Fragment() {
             when (result) {
                 is UploadResult.Success -> {
                     val data = result.response
+                    Snackbar.make(binding.root, "Image Uploaded", Snackbar.LENGTH_SHORT).show()
                     showUploadedImage(data)
                 }
                 is UploadResult.Failure -> {
@@ -68,6 +74,19 @@ class ImageUploadFragment : Fragment() {
 
     private fun pickImage() {
         ImagePicker.with(this)
+            .galleryOnly()
+            .compress(1024)
+            .crop()
+            .maxResultSize(1080, 1080)
+            .createIntent { intent ->
+                pickImageLauncher.launch(intent)
+            }
+    }
+
+    private fun takeImage() {
+        ImagePicker.with(this)
+            .cameraOnly()
+            .crop()
             .compress(1024)
             .maxResultSize(1080, 1080)
             .createIntent { intent ->
@@ -76,12 +95,6 @@ class ImageUploadFragment : Fragment() {
     }
 
     private fun showUploadedImage(data: UploadResponse) {
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        pickImage()
 
     }
 }

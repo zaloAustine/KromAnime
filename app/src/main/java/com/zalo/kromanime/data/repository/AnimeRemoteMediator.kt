@@ -22,16 +22,6 @@ class AnimeRemoteMediator(
         state: PagingState<Int, AnimeEntity>
     ): MediatorResult {
         try {
-            val page = when (loadType) {
-                LoadType.REFRESH -> 1
-                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                        ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    25 + 1
-                }
-            }
-
             val response = apiService.getAnimeList()
 
             return if (response.body()?.data != null) {
@@ -39,8 +29,6 @@ class AnimeRemoteMediator(
                     if (loadType == LoadType.REFRESH) {
                         animeDatabase.animeDao().clearAll()
                     }
-
-                    Log.d("Data", response.body()?.data!![0].title.toString())
                     animeDatabase.animeDao().insertAll(response.body()?.data?.map { it.toAnimeEntity() } ?: emptyList())
                 }
 

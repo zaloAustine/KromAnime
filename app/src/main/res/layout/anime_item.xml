@@ -1,50 +1,35 @@
-<!-- item_anime.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="4dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivAnime"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxHeight="200dp"
-            android:minHeight="200dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:padding="8dp"
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/animeTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:background="@color/semi_transparent_color"
+            android:padding="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/ivAnime"
-            app:layout_constraintTop_toBottomOf="@+id/ivAnime"
-            tools:text="Anime hd" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSynopsis"
-            android:padding="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:maxLength="100"
-            android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="@+id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            tools:text="Anime hd" />
-
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-import com.zalo.kromanime.data.api.models.AnimeItem
+package com.zalo.kromanime.data.api.models.animes
 
 data class AnimeResponse(
     val pagination: Pagination,

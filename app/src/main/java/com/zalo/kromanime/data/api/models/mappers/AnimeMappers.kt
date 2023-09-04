@@ -1,9 +1,7 @@
 package com.zalo.kromanime.data.api.models.mappers
 
-import com.zalo.kromanime.data.api.models.AnimeItem
+import com.zalo.kromanime.data.api.models.animes.AnimeItem
 import com.zalo.kromanime.data.database.AnimeEntity
-
-
 /**
 Created by zaloaustine in 9/4/23.
  */
@@ -11,7 +9,6 @@ fun AnimeItem.toAnimeEntity(): AnimeEntity {
     return AnimeEntity(
         mal_id = this.mal_id,
         url = this.url,
-        trailer = this.trailer,
         approved = this.approved,
         title = this.title,
         titleEnglish = this.title_english,
@@ -28,7 +25,8 @@ fun AnimeItem.toAnimeEntity(): AnimeEntity {
         favorites = this.favorites,
         synopsis = this.synopsis,
         season = this.season,
-        year = this.year
+        year = this.year,
+        images = this.images
     )
 
 }
@@ -36,7 +34,6 @@ fun AnimeItem.toAnimeEntity(): AnimeEntity {
         return AnimeItem(
             mal_id = this.mal_id,
             url = this.url,
-            trailer = this.trailer,
             approved = this.approved,
             title = this.title,
             title_english = this.titleEnglish,
@@ -53,7 +50,8 @@ fun AnimeItem.toAnimeEntity(): AnimeEntity {
             favorites = this.favorites,
             synopsis = this.synopsis,
             season = this.season,
-            year = this.year
+            year = this.year,
+            images = this.images
         )
 
 }

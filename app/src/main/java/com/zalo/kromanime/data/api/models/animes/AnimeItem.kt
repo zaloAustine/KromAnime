@@ -1,4 +1,7 @@
-package com.zalo.kromanime.data.api.models
+package com.zalo.kromanime.data.api.models.animes
+
+import androidx.room.TypeConverters
+import com.zalo.kromanime.data.database.ImagesTypeConverter
 
 
 /**
@@ -7,7 +10,7 @@ Created by zaloaustine in 9/4/23.
 data class AnimeItem(
     val mal_id: Int?,
     val url: String?,
-    val trailer: Trailer?,
+    val images: Images?,
     val approved: Boolean?,
     val title: String?,
     val title_english: String?,

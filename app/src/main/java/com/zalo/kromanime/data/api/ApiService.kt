@@ -1,6 +1,6 @@
 package com.zalo.kromanime.data.api
 
-import AnimeResponse
+import com.zalo.kromanime.data.api.models.animes.AnimeResponse
 import com.zalo.kromanime.data.api.models.upload.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
