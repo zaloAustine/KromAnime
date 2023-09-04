@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)
+        binding.navView.setOnNavigationItemReselectedListener {} //avoid fragment recreation
     }
 
 }

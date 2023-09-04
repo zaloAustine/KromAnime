@@ -7,22 +7,25 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zalo.kromanime.R
 import com.zalo.kromanime.data.api.models.mappers.toAnimeItem
 import com.zalo.kromanime.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: AnimeViewModel by viewModels()
     private val adapter = AnimeAdapter()
+    private var shimmerShown = false
+
 
     private var _binding: FragmentHomeBinding? = null
-
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -39,13 +42,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = getString(R.string.amine_title)
         setUpAdapter()
-        initiateShimmer()
         setUpSearch()
         getAnimeList()
 
+        if (!shimmerShown) {
+            initiateShimmer()
+            shimmerShown = true
+        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData()
         }
+
     }
 
     private fun setUpAdapter() {
@@ -85,14 +92,23 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
-
     }
 
     private fun initiateShimmer() {
         binding.shimmerViewContainer.startShimmer()
-        binding.shimmerViewContainer.stopShimmer()
-        binding.recyclerView.visibility = View.VISIBLE
-        binding.shimmerViewContainer.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.searchView.visibility = View.GONE
+        binding.shimmerViewContainer.visibility = View.VISIBLE
+
+
+        lifecycleScope.launch {
+            delay(2000)
+            binding.shimmerViewContainer.stopShimmer()
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.shimmerViewContainer.visibility = View.GONE
+            binding.searchView.visibility = View.VISIBLE
+
+        }
     }
 
     private fun filter(query: String) {
