@@ -6,19 +6,22 @@
 <table>
 <tr>
 <td>
+<img  width="200" height="400" src="./screenshots/01.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshots/02.png"/>
+</td>
+<td>
 <img  width="200" height="400" src="./screenshots/03.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshots/04.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshots/05.png"/>
 </td>
 </tr>
 
 <tr>
 <td>
-<img  width="200" height="400" src="./screenshots/06.png"/>
+<img  width="200" height="400" src="./screenshots/04.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshots/05.png"/>
 </td>
 <td>
 <img  width="200" height="400" src="./screenshots/06.png"/>
