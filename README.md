@@ -1,4 +1,16 @@
-# Weather App
+# Anime App
+
+Top 25 Anime Page:
+
+The app shows a list of the top 25 anime fetched from the Jikan API.
+Users can view anime titles and details, even without an internet connection, thanks to local storage using SQLite.
+A "Refresh" button allows users to update the list with the latest data.
+Image Upload Page:
+
+Users can upload images to the app.
+The app uses the Trace.moe API for image recognition to identify anime titles and episodes.
+The recognized information (title and episode) is displayed below the uploaded image for user convenience.
+This Android app offers two key features: displaying the top 25 anime and providing image-based anime recognition.
 
 * Architecture
     * MVVM - Model View View Model
