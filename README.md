@@ -14,7 +14,12 @@ This Android app offers two key features: displaying the top 25 anime and provid
 
 * Architecture
     * MVVM - Model View View Model
-    
+
+* AnimeRemoteMediator:
+  * Manages data synchronization between the Jikan API and the local SQLite database.
+  Fetches the top 25 anime data from the Jikan API and stores it for offline use.
+  When the "Top 25 Anime" page is opened, it checks for local data. If absent, it fetches the latest data from the API.
+
 <table>
 <tr>
 <td>
