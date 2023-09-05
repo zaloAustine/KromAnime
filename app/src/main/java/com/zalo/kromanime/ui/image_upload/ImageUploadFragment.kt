@@ -29,6 +29,7 @@ class ImageUploadFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK) {
             val selectedImageUri = result.data?.data
             selectedImageUri?.let { uri ->
+                binding.uploadProgressBar.visibility = View.VISIBLE
                 viewModel.uploadImage(uri)
             }
         }
@@ -67,6 +68,7 @@ class ImageUploadFragment : Fragment() {
                 is UploadResult.Failure -> {
                     val errorMessage = result.error
                     Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
+                    binding.uploadProgressBar.visibility = View.GONE
                 }
             }
         }
@@ -95,6 +97,10 @@ class ImageUploadFragment : Fragment() {
     }
 
     private fun showUploadedImage(data: UploadResponse) {
-
+        data.result[0].let {
+            binding.dottedSquareView.setImageUrl(it.image)
+            binding.fileNameTextView.text = it.filename
+            binding.uploadProgressBar.visibility = View.GONE
+        }
     }
 }
