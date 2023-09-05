@@ -19,7 +19,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 @HiltViewModel
 class ImageUploadViewModel @Inject constructor(private val apiService: ApiService) : ViewModel() {
 
-    // Create a LiveData to hold the upload response
     private val _uploadResponse = MutableLiveData<UploadResult>()
     val uploadResponse: LiveData<UploadResult>
         get() = _uploadResponse

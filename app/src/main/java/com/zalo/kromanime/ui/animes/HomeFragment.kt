@@ -22,8 +22,6 @@ class HomeFragment : Fragment() {
 
     private val viewModel: AnimeViewModel by viewModels()
     private val adapter = AnimeAdapter()
-    private var shimmerShown = false
-
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -44,15 +42,11 @@ class HomeFragment : Fragment() {
         setUpAdapter()
         setUpSearch()
         getAnimeList()
+        initiateShimmer()
 
-        if (!shimmerShown) {
-            initiateShimmer()
-            shimmerShown = true
-        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData()
         }
-
     }
 
     private fun setUpAdapter() {
@@ -100,14 +94,12 @@ class HomeFragment : Fragment() {
         binding.searchView.visibility = View.GONE
         binding.shimmerViewContainer.visibility = View.VISIBLE
 
-
         lifecycleScope.launch {
-            delay(2000)
+            delay(1500)
             binding.shimmerViewContainer.stopShimmer()
             binding.recyclerView.visibility = View.VISIBLE
             binding.shimmerViewContainer.visibility = View.GONE
             binding.searchView.visibility = View.VISIBLE
-
         }
     }
 
