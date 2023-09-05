@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.zalo.kromanime.R
 import com.zalo.kromanime.data.api.models.mappers.toAnimeItem
 import com.zalo.kromanime.databinding.FragmentHomeBinding
+import com.zalo.kromanime.utils.InternetUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,11 +48,13 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData()
         }
+
+        InternetUtils.checkAndShowRetrySnackbar(this){ viewModel.refreshData() }
     }
 
     private fun setUpAdapter() {
         binding.recyclerView.layoutManager =
-            GridLayoutManager(context, 2) //LinearLayoutManager(context)
+            GridLayoutManager(context, 2)
         binding.recyclerView.adapter = adapter
 
         viewModel.refreshData()

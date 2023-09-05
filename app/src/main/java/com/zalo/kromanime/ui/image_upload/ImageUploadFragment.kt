@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.zalo.kromanime.data.api.models.upload.UploadResponse
 import com.zalo.kromanime.data.api.models.upload.UploadResult
 import com.zalo.kromanime.databinding.FragmentImageUploadBinding
+import com.zalo.kromanime.utils.InternetUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,6 +56,7 @@ class ImageUploadFragment : Fragment() {
         binding.buttonTakeImage.setOnClickListener {
             takeImage()
         }
+        InternetUtils.checkAndShowRetrySnackbar(this){}
     }
 
     private fun initObservers() {
@@ -72,6 +74,10 @@ class ImageUploadFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     private fun pickImage() {

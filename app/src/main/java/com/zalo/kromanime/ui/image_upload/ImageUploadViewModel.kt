@@ -1,12 +1,11 @@
 package com.zalo.kromanime.ui.image_upload
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zalo.kromanime.data.api.ApiService
 import com.zalo.kromanime.data.api.models.upload.UploadResult
+import com.zalo.kromanime.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
@@ -19,8 +18,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 @HiltViewModel
 class ImageUploadViewModel @Inject constructor(private val apiService: ApiService) : ViewModel() {
 
-    private val _uploadResponse = MutableLiveData<UploadResult>()
-    val uploadResponse: LiveData<UploadResult>
+    private val _uploadResponse = SingleLiveEvent<UploadResult>()
+    val uploadResponse: SingleLiveEvent<UploadResult>
         get() = _uploadResponse
 
     fun uploadImage(imageUri: Uri) {
