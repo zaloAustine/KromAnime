@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -56,7 +57,6 @@ class ImageUploadFragment : Fragment() {
         binding.buttonTakeImage.setOnClickListener {
             takeImage()
         }
-        InternetUtils.checkAndShowRetrySnackbar(this) {}
     }
 
     private fun initObservers() {
@@ -105,5 +105,4 @@ class ImageUploadFragment : Fragment() {
                 pickImageLauncher.launch(intent)
             }
     }
-
 }

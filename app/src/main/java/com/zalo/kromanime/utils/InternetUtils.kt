@@ -4,54 +4,29 @@ package com.zalo.kromanime.utils
 /**
 Created by zaloaustine in 9/5/23.
  */
-import android.content.Context
-import android.net.ConnectivityManager
+import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.zalo.kromanime.R
+import java.io.IOException
 
 object InternetUtils {
 
-    fun checkAndShowRetrySnackbar(
-        fragment: Fragment,
-        message: String = "No internet",
-        duration: Int = Snackbar.LENGTH_LONG,
-        actionText: String = "Retry",
-        action: () -> Unit
-    ) {
-        if (!isInternetAvailable(fragment.requireContext())) {
-            showRetrySnackbar(fragment, message, duration, actionText, action)
+     fun isInternetAvailable(): Boolean {
+        val runtime = Runtime.getRuntime()
+        try {
+            // Ping Google's public DNS server (8.8.8.8) with a timeout of 5 seconds.
+            val process = runtime.exec("/system/bin/ping -c 1 -w 5 8.8.8.8")
+            val exitValue = process.waitFor()
+
+            // If the exit value is 0, then the ping was successful.
+            return exitValue == 0
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
         }
+        return false
     }
 
-    private fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
-    }
-
-
-    private fun showRetrySnackbar(
-        fragment: Fragment,
-        message: String,
-        duration: Int,
-        actionText: String,
-        action: () -> Unit
-    ) {
-        val snackbar = Snackbar.make(
-            fragment.requireView(),
-            message,
-            duration
-        )
-
-        snackbar.setAction(actionText) {
-            snackbar.dismiss()
-            action()
-        }
-
-        snackbar.setActionTextColor(ContextCompat.getColor(fragment.requireContext(), R.color.purple_200))
-        snackbar.show()
-    }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.zalo.kromanime.data.repository.AnimeRepository
+import com.zalo.kromanime.utils.InternetUtils
 import com.zalo.kromanime.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -36,6 +37,10 @@ class AnimeViewModel @Inject constructor(
             }
             result.onFailure {
                 _animeRefreshLiveEvent.postValue("An error occurred")
+            }
+
+            if (!InternetUtils.isInternetAvailable()) {
+                animeRefreshLiveEvent.postValue("No Internet. Swipe to refresh")
             }
         }
     }

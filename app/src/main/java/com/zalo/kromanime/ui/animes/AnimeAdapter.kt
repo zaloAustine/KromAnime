@@ -34,7 +34,7 @@ class AnimeAdapter : PagingDataAdapter<AnimeItem, AnimeAdapter.AnimeViewHolder>(
                     .into(binding.ivAnime)
             } else {
                 Glide.with(itemView.context)
-                    .load(R.drawable.rotate)
+                    .load(R.drawable.ic_baseline_pause_circle_filled_24)
                     .apply(RequestOptions().fitCenter())
                     .into(binding.ivAnime)
             }
