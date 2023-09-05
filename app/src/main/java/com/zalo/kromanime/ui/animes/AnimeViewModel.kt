@@ -46,5 +46,4 @@ class AnimeViewModel @Inject constructor(
     }
 
     fun getFilteredAnimeList(query: String) = animeRepository.getFilteredAnimeList(query).asLiveData()
-
 }
