@@ -1,3 +1,5 @@
+package com.zalo.kromanime.ui.widgets
+
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,6 +11,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
+import com.zalo.kromanime.R
 
 class DottedSquareView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,6 +22,10 @@ class DottedSquareView @JvmOverloads constructor(
     init {
         imageView = ImageView(context)
         val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+
+        val margin8dp = resources.getDimensionPixelSize(R.dimen.padding_10)
+        params.setMargins(margin8dp, margin8dp, margin8dp, margin8dp)
+
         imageView.layoutParams = params
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
