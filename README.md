@@ -8,8 +8,6 @@
 <td>
 <img  width="800" height="400" src="./screenshots/01.png"/>
 </td>
-</tr>
-<tr>
 <td>
 <img  width="800" height="400" src="./screenshots/02.png"/>
 </td>
