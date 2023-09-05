@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +23,8 @@ class AnimeAdapter : PagingDataAdapter<AnimeItem, AnimeAdapter.AnimeViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(animeItem: AnimeItem) {
 
-            val slideUpAnimation: Animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.slide_up)
+            val slideUpAnimation: Animation =
+                AnimationUtils.loadAnimation(binding.root.context, R.anim.slide_up)
             binding.animeTitle.startAnimation(slideUpAnimation)
             binding.animeTitle.text = animeItem.title
 

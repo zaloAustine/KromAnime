@@ -8,13 +8,10 @@
     <color name="black">#00B892</color>
     <color name="white">#00B892</color>
     <color name="background">#dddddd</color>
-
 <!--    image Selection-->
     <color name="ucrop_color_toolbar">#EBE7E7</color>
     <color name="ucrop_color_statusbar">#EBE7E7</color>
     <color name="ucrop_color_widget_active">#EBE7E7</color>
     <color name="semi_transparent_color">#A3505050</color>
-
-    <color name="progressBarColor">#FFFFFF</color> <!-- Orange color -->
-
+    <color name="progressBarColor">#FFFFFF</color>
 </resources>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
+import com.zalo.kromanime.R
 import com.zalo.kromanime.data.api.models.upload.UploadResponse
 import com.zalo.kromanime.data.api.models.upload.UploadResult
 import com.zalo.kromanime.databinding.FragmentImageUploadBinding
@@ -40,7 +41,6 @@ class ImageUploadFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentImageUploadBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,7 +48,7 @@ class ImageUploadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
-        activity?.title = "Image Upload"
+        activity?.title = getString(R.string.image_upload_title)
         binding.buttonSelectImage.setOnClickListener {
             pickImage()
         }
@@ -56,7 +56,7 @@ class ImageUploadFragment : Fragment() {
         binding.buttonTakeImage.setOnClickListener {
             takeImage()
         }
-        InternetUtils.checkAndShowRetrySnackbar(this){}
+        InternetUtils.checkAndShowRetrySnackbar(this) {}
     }
 
     private fun initObservers() {
@@ -64,7 +64,7 @@ class ImageUploadFragment : Fragment() {
             when (result) {
                 is UploadResult.Success -> {
                     val data = result.response
-                    Snackbar.make(binding.root, "Image Uploaded", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.uploaded), Snackbar.LENGTH_SHORT).show()
                     showUploadedImage(data)
                 }
                 is UploadResult.Failure -> {
@@ -76,8 +76,12 @@ class ImageUploadFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun showUploadedImage(data: UploadResponse) {
+        data.result[0].let {
+            binding.dottedSquareView.setImageUrl(it.image)
+            binding.fileNameTextView.text = it.filename
+            binding.uploadProgressBar.visibility = View.GONE
+        }
     }
 
     private fun pickImage() {
@@ -102,11 +106,4 @@ class ImageUploadFragment : Fragment() {
             }
     }
 
-    private fun showUploadedImage(data: UploadResponse) {
-        data.result[0].let {
-            binding.dottedSquareView.setImageUrl(it.image)
-            binding.fileNameTextView.text = it.filename
-            binding.uploadProgressBar.visibility = View.GONE
-        }
-    }
 }

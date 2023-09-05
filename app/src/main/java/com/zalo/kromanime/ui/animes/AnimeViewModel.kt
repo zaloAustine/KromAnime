@@ -9,6 +9,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.zalo.kromanime.data.repository.AnimeRepository
+import com.zalo.kromanime.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -17,22 +18,24 @@ import kotlinx.coroutines.launch
 class AnimeViewModel @Inject constructor(
     private val animeRepository: AnimeRepository
 ) : ViewModel() {
+    private val _animeRefreshLiveEvent = SingleLiveEvent<String>()
+    val animeRefreshLiveEvent: SingleLiveEvent<String>
+        get() = _animeRefreshLiveEvent
 
     val animeList = animeRepository.getAnimeList()
         .cachedIn(viewModelScope)
         .asLiveData()
 
-    // Use this function to refresh data from the remote API
     fun refreshData() {
         viewModelScope.launch {
             val result = kotlin.runCatching {
                 animeRepository.getAnimeList()
             }
             result.onSuccess {
-                // Data refreshed successfully
+                _animeRefreshLiveEvent.postValue("Refreshed")
             }
-            result.onFailure { exception ->
-                val errorMessage = "An error occurred: ${exception.localizedMessage}"
+            result.onFailure {
+                _animeRefreshLiveEvent.postValue("An error occurred")
             }
         }
     }

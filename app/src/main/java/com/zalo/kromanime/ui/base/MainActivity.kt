@@ -13,8 +13,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
-    private val SPLASH_DELAY: Long = 2000
+
+    companion object {
+        const val SPLASH_DELAY: Long = 2000
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         animation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
-               binding.dropTextView.visibility = View.VISIBLE
+                binding.dropTextView.visibility = View.VISIBLE
             }
             override fun onAnimationEnd(animation: Animation?) {
             }
-
             override fun onAnimationRepeat(animation: Animation?) {
             }
         })

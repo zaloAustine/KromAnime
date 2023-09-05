@@ -1,8 +1,5 @@
 package com.zalo.kromanime.data.api.models.animes
 
-import androidx.room.TypeConverters
-import com.zalo.kromanime.data.database.ImagesTypeConverter
-
 
 /**
 Created by zaloaustine in 9/4/23.

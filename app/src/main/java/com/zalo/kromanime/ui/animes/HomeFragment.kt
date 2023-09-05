@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.zalo.kromanime.R
 import com.zalo.kromanime.data.api.models.mappers.toAnimeItem
 import com.zalo.kromanime.databinding.FragmentHomeBinding
@@ -40,16 +41,25 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshLayout.isRefreshing = true
         super.onViewCreated(view, savedInstanceState)
         activity?.title = getString(R.string.amine_title)
+
         setUpAdapter()
         setUpSearch()
         getAnimeList()
         initiateShimmer()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.animeRefreshLiveEvent.observe(viewLifecycleOwner) { message ->
+            Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData()
         }
 
-        InternetUtils.checkAndShowRetrySnackbar(this){ viewModel.refreshData() }
+        InternetUtils.checkAndShowRetrySnackbar(this) { viewModel.refreshData() }
     }
 
     private fun setUpAdapter() {
@@ -71,7 +81,6 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle query submission
                 if (query.isNullOrEmpty()) {
                     getAnimeList()
                 }
@@ -79,7 +88,6 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Handle query text changes
                 val query = newText ?: ""
                 filter(query)
 
