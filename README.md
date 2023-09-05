@@ -2,22 +2,11 @@
 
 * Architecture
     * MVVM - Model View View Model
-
+    
 <table>
 <tr>
 <td>
-<img  width="800" height="400" src="./screenshots/01.png"/>
-</td>
-<td>
-<img  width="800" height="400" src="./screenshots/02.png"/>
-</td>
-</tr>
-</table>
-
-<table>
-<tr>
-<td>
-<img  width="200" height="400" src="./screenshots/03png"/>
+<img  width="200" height="400" src="./screenshots/03.png"/>
 </td>
 <td>
 <img  width="200" height="400" src="./screenshots/04.png"/>
@@ -31,6 +20,10 @@
 <td>
 <img  width="200" height="400" src="./screenshots/06.png"/>
 </td>
+<td>
+<img  width="200" height="400" src="./screenshots/06.png"/>
+</td>
+</tr>
 </table>
 
 ## Tech-stack
